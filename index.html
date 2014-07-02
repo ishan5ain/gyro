@@ -9,14 +9,14 @@
   </style>
   </head>
   <body>
-  <canvas id="myCanvas" width="578" height="200"></canvas>
+  <canvas id="myCanvas" width="500" height="500" style="position: absolute; top: 100px; left: 500px; border:1px solid #000000;"></canvas>
   <h3 id="position"></h3>
   <script>
     var can = document.getElementById('myCanvas');
     var ctx = can.getContext('2d');
 
-    var cx = 100;
-    var cy  =100;
+    var cx = 250;
+    var cy  =250;
 
     // in case you like using degrees
     function toRadians(deg) {
@@ -33,7 +33,7 @@
       ctx.fillStyle = '#FFCC00'
       ctx.beginPath();
       ctx.moveTo(cx,cy);
-      ctx.arc(cx,cy,60,toRadians(prevdeg+degrees),toRadians(prevdeg+degrees+120));
+      ctx.arc(cx,cy,100,toRadians(prevdeg+degrees),toRadians(prevdeg+degrees+120));
       ctx.lineTo(cx,cy);
       ctx.closePath();
       ctx.fill();
@@ -41,7 +41,7 @@
       ctx.fillStyle = '#CC0000'
       ctx.beginPath();
       ctx.moveTo(cx,cy);
-      ctx.arc(cx,cy,60,toRadians(prevdeg+degrees+120),toRadians(prevdeg+degrees+240));
+      ctx.arc(cx,cy,100,toRadians(prevdeg+degrees+120),toRadians(prevdeg+degrees+240));
       ctx.lineTo(cx,cy);
       ctx.closePath();
       ctx.fill();
@@ -49,7 +49,7 @@
       ctx.fillStyle = '#0066FF'
       ctx.beginPath();
       ctx.moveTo(cx,cy);
-      ctx.arc(cx,cy,60,toRadians(prevdeg+degrees+240),toRadians(prevdeg+degrees+360));
+      ctx.arc(cx,cy,100,toRadians(prevdeg+degrees+240),toRadians(prevdeg+degrees+360));
       ctx.lineTo(cx,cy);
       ctx.closePath();
       ctx.fill();
