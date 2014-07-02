@@ -8,69 +8,87 @@
     }
   </style>
   </head>
-  <body>
-  <canvas id="myCanvas" width="500" height="500" style="position: absolute; top: 100px; left: 500px; border:1px solid #000000;"></canvas>
-  <h3 id="position"></h3>
-  <script>
-    var can = document.getElementById('myCanvas');
-    var ctx = can.getContext('2d');
+  <body onclick="pause()">
+    <canvas id="myCanvas" width="500" height="500" style="position: absolute; top: 100px; left: 500px; border:1px solid #000000;"></canvas>
+    <h3 id="position"></h3>
+    <h3> Click to pause/resume game </h3>
+    <script>
+      //alert("alert");
+      var can = document.getElementById('myCanvas');
+      var ctx = can.getContext('2d');
 
-    var cx = 250;
-    var cy  =250;
+      var cx = 250;
+      var cy  =250;
 
-    // in case you like using degrees
-    function toRadians(deg) {
-      return deg * Math.PI / 180
-    }
+      // in case you like using degrees
+      function toRadians(deg) {
+        return deg * Math.PI / 180
+      }
+      var flag=0;
+      var prevdeg = 0;
+      var currentdeg = 0
+      // draw a sector from 0 to Math.PI/2 aka one quarter of the Pie, going clockwise, starting at 0
+      function draw_circle(degrees)
+      {
+        prevdeg=currentdeg;
+        currentdeg=degrees;
+        ctx.fillStyle = '#FFCC00'
+        ctx.beginPath();
+        ctx.moveTo(cx,cy);
+        ctx.arc(cx,cy,100,toRadians(prevdeg+degrees),toRadians(prevdeg+degrees+120));
+        ctx.lineTo(cx,cy);
+        ctx.closePath();
+        ctx.fill();
 
-    var prevdeg = 0;
-    var currentdeg = 0
-    // draw a sector from 0 to Math.PI/2 aka one quarter of the Pie, going clockwise, starting at 0
-    function draw_circle(degrees)
-    {
-      prevdeg=currentdeg;
-      currentdeg=degrees;
-      ctx.fillStyle = '#FFCC00'
-      ctx.beginPath();
-      ctx.moveTo(cx,cy);
-      ctx.arc(cx,cy,100,toRadians(prevdeg+degrees),toRadians(prevdeg+degrees+120));
-      ctx.lineTo(cx,cy);
-      ctx.closePath();
-      ctx.fill();
-
-      ctx.fillStyle = '#CC0000'
-      ctx.beginPath();
-      ctx.moveTo(cx,cy);
-      ctx.arc(cx,cy,100,toRadians(prevdeg+degrees+120),toRadians(prevdeg+degrees+240));
-      ctx.lineTo(cx,cy);
-      ctx.closePath();
-      ctx.fill();
+        ctx.fillStyle = '#CC0000'
+        ctx.beginPath();
+        ctx.moveTo(cx,cy);
+        ctx.arc(cx,cy,100,toRadians(prevdeg+degrees+120),toRadians(prevdeg+degrees+240));
+        ctx.lineTo(cx,cy);
+        ctx.closePath();
+        ctx.fill();
+        
+        ctx.fillStyle = '#0066FF'
+        ctx.beginPath();
+        ctx.moveTo(cx,cy);
+        ctx.arc(cx,cy,100,toRadians(prevdeg+degrees+240),toRadians(prevdeg+degrees+360));
+        ctx.lineTo(cx,cy);
+        ctx.closePath();
+        ctx.fill();
+      }
       
-      ctx.fillStyle = '#0066FF'
-      ctx.beginPath();
-      ctx.moveTo(cx,cy);
-      ctx.arc(cx,cy,100,toRadians(prevdeg+degrees+240),toRadians(prevdeg+degrees+360));
-      ctx.lineTo(cx,cy);
-      ctx.closePath();
-      ctx.fill();
-    }
-    
-
-    var cursorX;
-    var cursorY;
-    document.onmousemove = function(e){
-      cursorX = e.pageX;
-      cursorY = e.pageY;
-    }
-    var prev=0;
-    var current=0;
-    setInterval("checkCursor()", 1);
-    function checkCursor(){
-    document.getElementById('position').innerHTML="Cursor at: " + cursorX + ", " + cursorY;
-    prev=current;
-    current=cursorX;
-    draw_circle((current)/3);
-  }    
-  </script>
+      function pause()
+      {
+        if (flag===0){
+          //alert("changing flag to 1");
+          flag=1;
+          //alert("executing function");
+          var cursorX;
+          var cursorY;
+          var prev=0;
+          var current=0;
+          document.onmousemove = function(e){
+            //alert("mousemove function executing");
+            cursorX = e.pageX;
+            cursorY = e.pageY;
+            document.getElementById('position').innerHTML="Cursor at: " + cursorX + ", " + cursorY;
+            prev=current;
+            current=cursorX;
+            draw_circle((current)/3);
+          }
+        }
+        else{
+          //alert("changing flag to 0");
+          flag=0;
+          document.onmousemove = function(e){
+          //alert("mousemove function executing");
+            cursorX = e.pageX;
+            cursorY = e.pageY;
+            document.getElementById('position').innerHTML="Cursor at: " + cursorX + ", " + cursorY;
+            draw_circle((current)/3);
+          }
+        }
+      }   
+    </script>
   </body>
 </html>      
