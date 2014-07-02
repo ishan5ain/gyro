@@ -12,6 +12,7 @@
     <canvas id="myCanvas" width="500" height="500" style="position: absolute; top: 100px; left: 500px; border:1px solid #000000;"></canvas>
     <h3 id="position"></h3>
     <h3> Click to pause/resume game </h3>
+    <h3 id="test"></h3>
     <script>
       //alert("alert");
       var can = document.getElementById('myCanvas');
@@ -56,7 +57,25 @@
         ctx.closePath();
         ctx.fill();
       }
-      
+      var i=0;
+      function balls(){
+        document.getElementById("test").innerHTML=i+1;
+        i=i+1;
+        /*x=Math.random();
+        x=x*500;
+        y=Math.random();
+        y=y*500;
+        ctx.fillStyle = '#0066FF'
+        ctx.beginPath();
+        ctx.moveTo(x,y);
+        ctx.arc(x,y,20,toRadians(0),toRadians(360));
+        ctx.lineTo(cx,cy);
+        ctx.closePath();
+        ctx.fill();*/
+
+      }
+      setInterval(balls(),1000);
+
       function pause()
       {
         if (flag===0){
