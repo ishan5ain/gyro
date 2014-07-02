@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <style>
+    body {
+    margin: 0px;
+    padding: 0px;
+    }
+  </style>
+  </head>
+  <body>
+  <canvas id="myCanvas" width="578" height="200"></canvas>
+  <h3 id="position"></h3>
+  <script>
+    var can = document.getElementById('myCanvas');
+    var ctx = can.getContext('2d');
+
+    var cx = 100;
+    var cy  =100;
+
+    // in case you like using degrees
+    function toRadians(deg) {
+      return deg * Math.PI / 180
+    }
+
+    var prevdeg = 0;
+    var currentdeg = 0
+    // draw a sector from 0 to Math.PI/2 aka one quarter of the Pie, going clockwise, starting at 0
+    function draw_circle(degrees)
+    {
+      prevdeg=currentdeg;
+      currentdeg=degrees;
+      ctx.fillStyle = '#FFCC00'
+      ctx.beginPath();
+      ctx.moveTo(cx,cy);
+      ctx.arc(cx,cy,60,toRadians(prevdeg+degrees),toRadians(prevdeg+degrees+120));
+      ctx.lineTo(cx,cy);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = '#CC0000'
+      ctx.beginPath();
+      ctx.moveTo(cx,cy);
+      ctx.arc(cx,cy,60,toRadians(prevdeg+degrees+120),toRadians(prevdeg+degrees+240));
+      ctx.lineTo(cx,cy);
+      ctx.closePath();
+      ctx.fill();
+      
+      ctx.fillStyle = '#0066FF'
+      ctx.beginPath();
+      ctx.moveTo(cx,cy);
+      ctx.arc(cx,cy,60,toRadians(prevdeg+degrees+240),toRadians(prevdeg+degrees+360));
+      ctx.lineTo(cx,cy);
+      ctx.closePath();
+      ctx.fill();
+    }
+    
+
+    var cursorX;
+    var cursorY;
+    document.onmousemove = function(e){
+      cursorX = e.pageX;
+      cursorY = e.pageY;
+    }
+    var prev=0;
+    var current=0;
+    setInterval("checkCursor()", 1);
+    function checkCursor(){
+    document.getElementById('position').innerHTML="Cursor at: " + cursorX + ", " + cursorY;
+    prev=current;
+    current=cursorX;
+    draw_circle((current)/3);
+  }    
+  </script>
+  </body>
+</html>      
