@@ -22,6 +22,8 @@
       var cx = 250;
       var cy  =250;
       var side = 0;
+      var color;
+      var randomcolor =0;
 
       // in case you like using degrees
       //random();
@@ -70,39 +72,56 @@
         //i=i+1;
           side = Math.random()*4;
           var side = Math.floor(side);
+          randomcolor = Math.random()*3;
+          randomcolor = Math.floor(randomcolor);
+          if (randomcolor===0){
+            color='#FFCC00';
+          }
+          if (randomcolor===1){
+            color='#CC0000';
+          }
+          if (randomcolor===2){
+            color='#0066FF';
+          }
+          
           if(side===0){
             x=0;
             
             y=Math.random();
             y=y*500;
+            //color='#FFCC00';
           }
           else if(side===1){
             y=0;
             x=Math.random();
             x=x*500;
+            //color='#CC0000';
             
           }
           else if(side===2){
             x=500;
             y=Math.random();
             y=y*500;
+            //color='#0066FF';
           }
           else if(side===3){
             y=500;
             x=Math.random();
             x=x*500;
+            //color='#0066FF';
             
           }
           else{
             y=500;
             x=Math.random();
             x=x*500;
+            //color='#CC0000';
           }
           
           
         
         document.getElementById("pos").innerHTML=side+"+"+x+"+"+y;
-        ctx.fillStyle = '#FF3399'
+        ctx.fillStyle = color;
         ctx.beginPath();
         //ctx.moveTo(x,y);
         ctx.arc(x,y,20,toRadians(0),toRadians(360));
