@@ -13,6 +13,7 @@
     <h3 id="position"></h3>
     <h3> Click to pause/resume game </h3>
     <h3 id="test"></h3>
+    <h3 id="pos"></h3>
     <script>
       //alert("alert");
       var can = document.getElementById('myCanvas');
@@ -58,6 +59,9 @@
         ctx.fill();
       }
       var i=0;
+      function random(){
+        setInterval(balls(),1000);
+      }
       function balls(){
         //document.getElementById("test").innerHTML=i+1;
         //i=i+1;
@@ -65,20 +69,23 @@
         x=x*500;
         y=Math.random();
         y=y*500;
+        document.getElementById("pos").innerHTML=x+"+"+y;
         ctx.fillStyle = '#FF3399'
         ctx.beginPath();
-        ctx.moveTo(x,y);
+        //ctx.moveTo(x,y);
         ctx.arc(x,y,20,toRadians(0),toRadians(360));
         ctx.lineTo(cx,cy);
         ctx.closePath();
         ctx.fill();
 
       }
-      setInterval(alert("hahaha"),1000);
+      //setInterval(alert("hahaha"),1000);
 
       function pause()
       {
+
         if (flag===0){
+          random();
           //alert("changing flag to 1");
           flag=1;
           //alert("executing function");
@@ -87,7 +94,7 @@
           var prev=0;
           var current=0;
           document.onmousemove = function(e){
-            setInterval(balls(),1000);
+            //setInterval(balls(),1000);
             //alert("mousemove function executing");
             cursorX = e.pageX;
             cursorY = e.pageY;
