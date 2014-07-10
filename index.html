@@ -9,7 +9,9 @@
   </style>
   </head>
   <body onclick="pause()">
-    <canvas id="myCanvas" width="500" height="500" style="position: absolute; top: 100px; left: 500px; border:1px solid #000000;"></canvas>
+    <canvas id="myCanvas" width="500" height="500" style="position: absolute; top: 100px; left: 500px; border:1px solid #000000;z-index:1;"></canvas>
+    <canvas id="myCanvas1" width="500" height="500" style="position: absolute; top: 100px; left: 500px; border:1px solid #000000; z-index:-1;"></canvas>
+    
     <h3 id="position"></h3>
     <h3> Click to pause/resume game </h3>
     <h3 id="test"></h3>
@@ -18,6 +20,9 @@
       //alert("alert");
       var can = document.getElementById('myCanvas');
       var ctx = can.getContext('2d');
+      var can1 = document.getElementById('myCanvas1');
+      var ctx1 = can1.getContext('2d');
+
 
       var cx = 250;
       var cy  =250;
@@ -107,14 +112,15 @@
     
         
         document.getElementById("pos").innerHTML=side+"+"+x+"+"+y;
-        ctx.fillStyle = color;
-        ctx.beginPath();
+        ctx1.fillStyle = color;
+        ctx1.clearRect(0,0,500,500);
+        ctx1.beginPath();
         //ctx.moveTo(x,y);
-        ctx.arc(x,y,20,toRadians(0),toRadians(360));
-        ctx.lineTo(cx,cy);
-        ctx.closePath();
-        ctx.fill();
-        setTimeout(function(){draw()}, 30);
+        ctx1.arc(x,y,20,toRadians(0),toRadians(360));
+        //ctx.lineTo(cx,cy);
+        ctx1.closePath();
+        ctx1.fill();
+        setTimeout(function(){draw()}, 300);
       }
       function balls(){
         //document.getElementById("test").innerHTML=i+1;
